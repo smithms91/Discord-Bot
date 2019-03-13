@@ -25,8 +25,6 @@ client.on('message', message => {
 
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-  // console.log(args);
-  // console.log(command);
 
   /* $help - DM */
   if(command == "help") {
@@ -36,87 +34,106 @@ client.on('message', message => {
 
   /* $hi @username -> Says Hi */
   if(command == "hi") {
-    let member = message.mentions.members.first();
-    giphy.search('gifs', {'q': 'hello'}).then((response) => {
-      let totalResponses = response.data.length;
-      let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
-      let responseFinal = response.data[responseIndex];
+    if(message.mentions.members.first()) {
+      let member = message.mentions.members.first();
+      giphy.search('gifs', {'q': 'hello'}).then((response) => {
+        let totalResponses = response.data.length;
+        let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
+        let responseFinal = response.data[responseIndex];
 
-      message.channel.send(`Hey ${member}, ${message.author} says hello!`, {
-        files: [responseFinal.images.fixed_height.url]
-      });
-
-    }).catch(() => {
-      message.channel.send("I'm confused.");
-    })
+        message.channel.send(`Hey ${member}, ${message.author} says hello!`, {
+          files: [responseFinal.images.fixed_height.url]
+        });
+      }).catch(() => {
+        message.channel.send("I'm confused.");
+      })
+    } else {
+      message.channel.send("Enter a username.");
+    }
   }
 
   /* $pet @username */
   if(command == "pet") {
-    let member = message.mentions.members.first();
-    giphy.search('gifs', {'q': 'petting'}).then((response) => {
-      let totalResponses = response.data.length;
-      let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
-      let responseFinal = response.data[responseIndex];
+    if(message.mentions.members.first()) {
+      let member = message.mentions.members.first();
+      giphy.search('gifs', {'q': 'petting'}).then((response) => {
+        let totalResponses = response.data.length;
+        let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
+        let responseFinal = response.data[responseIndex];
 
-      message.channel.send(`${message.author} pets ${member}.  Weird flex.`, {
-        files: [responseFinal.images.fixed_height.url]
-      });
+        message.channel.send(`${message.author} pets ${member}.  Weird flex.`, {
+          files: [responseFinal.images.fixed_height.url]
+        });
 
-    }).catch(() => {
-      message.channel.send("I'm confused.");
-    })
+      }).catch(() => {
+        message.channel.send("I'm confused.");
+      })
+    } else {
+      message.channel.send("Enter a username.");
+    }
   }
 
   /* $punch @username */
   if(command == "punch") {
-    let member = message.mentions.members.first();
-    giphy.search('gifs', {'q': 'punching'}).then((response) => {
-      let totalResponses = response.data.length;
-      let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
-      let responseFinal = response.data[responseIndex];
+    if(message.mentions.members.first()) {
+      let member = message.mentions.members.first();
+      giphy.search('gifs', {'q': 'punching'}).then((response) => {
+        let totalResponses = response.data.length;
+        let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
+        let responseFinal = response.data[responseIndex];
 
-      message.channel.send(`${message.author} punched ${member}.  Wow.`, {
-        files: [responseFinal.images.fixed_height.url]
-      });
-    }).catch(() => {
-      message.channel.send("I'm confused.");
-    })
+        message.channel.send(`${message.author} punched ${member}.  Wow.`, {
+          files: [responseFinal.images.fixed_height.url]
+        });
+      }).catch(() => {
+        message.channel.send("I'm confused.");
+      })
+    } else {
+      message.channel.send("Enter a username.");
+    }
   }
 
   /* $slap @username */
   if(command == "slap") {
-    let member = message.mentions.members.first();
-    giphy.search('gifs', {'q': 'slapping'}).then((response) => {
-      let totalResponses = response.data.length;
-      let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
-      let responseFinal = response.data[responseIndex];
+    if(message.mentions.members.first()) {
+      let member = message.mentions.members.first();
+      giphy.search('gifs', {'q': 'slapping'}).then((response) => {
+        let totalResponses = response.data.length;
+        let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
+        let responseFinal = response.data[responseIndex];
 
-      message.channel.send(`${message.author} slaps ${member}.  What will ${member} do next!?`, {
-        files: [responseFinal.images.fixed_height.url]
-      });
-    }).catch(() => {
-      message.channel.send("I'm confused.");
-    })
+        message.channel.send(`${message.author} slaps ${member}.  What will ${member} do next!?`, {
+          files: [responseFinal.images.fixed_height.url]
+        });
+      }).catch(() => {
+        message.channel.send("I'm confused.");
+      })
+    } else {
+      message.channel.send("Enter a username.");
+    }
   }
 
   /* $hug @username */
   if (command == "hug") {
-    let member = message.mentions.members.first();
-    giphy.search('gifs', {'q': 'hug'}).then((response) => {
-      let totalResponses = response.data.length;
-      let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
-      let responseFinal = response.data[responseIndex];
-      let responses = [`${message.author} hugs ${member}.  :hug:`, `${message.author} gives ${member} a hug.`, `${member} gets a hug from ${message.author}`];
-      let rand = Math.floor(Math.random() * responses.length);
-
-      message.channel.send(`${responses[rand]}`, {
-        files: [responseFinal.images.fixed_height.url]
-      });
-
-    }).catch(() => {
-      message.channel.send("I'm confused.");
-    })
+    if(message.mentions.members.first()) {
+      let member = message.mentions.members.first();
+      giphy.search('gifs', {'q': 'hug'}).then((response) => {
+        let totalResponses = response.data.length;
+        let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
+        let responseFinal = response.data[responseIndex];
+        let responses = [`${message.author} hugs ${member}.  :hug:`, `${message.author} gives ${member} a hug.`, `${member} gets a hug from ${message.author}`];
+        let rand = Math.floor(Math.random() * responses.length);
+  
+        message.channel.send(`${responses[rand]}`, {
+          files: [responseFinal.images.fixed_height.url]
+        });
+  
+      }).catch(() => {
+        message.channel.send("I'm confused.");
+      })
+    } else {
+      message.channel.send("Enter a username.");
+    }
   }
 
   /* $flip -> Heads or tails */
@@ -127,7 +144,6 @@ client.on('message', message => {
     } else {
       message.channel.send("```Tails```");
     }
-    console.log(coin);
   }
 
   /* $points -> View your points */
@@ -155,28 +171,28 @@ client.on('message', message => {
 
   /* $bet X - Win 2x - 25% Chance */
   if (command == "bet") {
-    // console.log(message.content.substr(`${prefix}quote `.length));
-    connection.query(`SELECT * FROM points WHERE name='${message.member.user.tag}'`, (error, result, field) => {
-      let value = parseInt(args[0]);
-      console.log(`Value: ${value}`);
-      let currentPoints = parseInt(result[0].points);
-      let winPoints = parseInt(currentPoints + (value * 2));
-      let losePoints = parseInt(currentPoints - value);
-      let odds = Math.random();
-      console.log(currentPoints);
-      console.log(winPoints);
-      if (value > currentPoints) {
-        message.channel.send(`You dont have enough points!!`);
-      } else {
-        if (odds >= .75) {
-          connection.query(`UPDATE points SET points="${winPoints}" WHERE name="${message.member.user.tag}"`);
-          message.channel.send(`You Win ${value * 2} points! You have ${winPoints} in total!`);
+    let value = parseInt(args[0]);
+    let odds = Math.random();
+    if(!isNaN(value)) {
+      connection.query(`SELECT * FROM points WHERE name='${message.member.user.tag}'`, (error, result, field) => {
+        let currentPoints = parseInt(result[0].points);
+        let winPoints = parseInt(currentPoints + (value * 2));
+        let losePoints = parseInt(currentPoints - value);
+        if (value > currentPoints) {
+          message.channel.send(`You dont have enough points!!`);
         } else {
-          connection.query(`UPDATE points SET points="${losePoints}" WHERE name="${message.member.user.tag}"`);
-          message.channel.send(`You Lost ${value} points! You have ${losePoints} in total!`);
+          if (odds >= .75) {
+            connection.query(`UPDATE points SET points="${winPoints}" WHERE name="${message.member.user.tag}"`);
+            message.channel.send(`You Win ${value * 2} points! You have ${winPoints} in total!`);
+          } else {
+            connection.query(`UPDATE points SET points="${losePoints}" WHERE name="${message.member.user.tag}"`);
+            message.channel.send(`You Lost ${value} points! You have ${losePoints} in total!`);
+          }
         }
-      }
-    });
+      });
+    } else {
+      message.channel.send(`Enter a number!`);
+    }
   }
 
   /* $pay @username [amount] -> Pay a user */
@@ -184,31 +200,36 @@ client.on('message', message => {
     let payee = message.mentions.members.first().user.tag;
     let payer = message.member.user.tag;
     let amount = parseInt(args[1]);
-
-    /* This is the user RECEIVING payment */
-    connection.query(`SELECT * FROM points WHERE name='${payee}'`, (error, result, field) => {
-      if(result.length > 0) {
-        let currentPoints = parseInt(result[0].points);
-        connection.query(`UPDATE points SET points="${currentPoints + amount}" WHERE name="${payee}"`);
-      } else {
-        message.channel.send(`That user doesn't exist!`);
-      }
-    });
-
-    /* This is the user SENDING payment */
-    connection.query(`SELECT * FROM points WHERE name='${payer}'`, (error, result, field) => {
-      if(result.length > 0) {
-        let currentPoints = parseInt(result[0].points);
-        if(currentPoints < amount) {
-          message.channel.send("You don't have enough points!");
+    if(!isNaN(amount)) {
+      /* This is the user RECEIVING payment */
+      connection.query(`SELECT * FROM points WHERE name='${payee}'`, (error, result, field) => {
+        if(result.length > 0) {
+          let currentPoints = parseInt(result[0].points);
+          connection.query(`UPDATE points SET points="${currentPoints + amount}" WHERE name="${payee}"`);
         } else {
-          connection.query(`UPDATE points SET points="${currentPoints - amount}" WHERE name="${payer}"`);
-          message.channel.send(`${payer} gave ${payee} ${amount} points! What a nice guy!`);
+          message.channel.send(`That user doesn't exist!`);
         }
-      } else {
-        message.channel.send(`That user doesn't exist!`);
-      }
-    });
+      });
+
+      /* This is the user SENDING payment */
+      connection.query(`SELECT * FROM points WHERE name='${payer}'`, (error, result, field) => {
+        if(result.length > 0) {
+          let currentPoints = parseInt(result[0].points);
+          if(currentPoints < amount) {
+            message.channel.send("You don't have enough points!");
+          } else {
+            connection.query(`UPDATE points SET points="${currentPoints - amount}" WHERE name="${payer}"`);
+            message.channel.send(`${payer} gave ${payee} ${amount} points! What a nice guy!`);
+          }
+        } else {
+          message.channel.send(`That user doesn't exist!`);
+        }
+      });
+    } else {
+      message.channel.send(`Enter a number!`);
+    }
+
+    
 
   }
 
@@ -218,7 +239,7 @@ client.on('message', message => {
     let number = parseInt(args[0]);
     let randomNumber = Math.floor((Math.random() * 10) + 1);
     if(args.length <= 1) {
-      if(number < 1 || number > 10) {
+      if(number < 1 || number > 10 || isNaN(number)) {
         message.channel.send(`Your number is invalid. Pick a number 1-10.`);
       } else {
         connection.query(`SELECT * FROM points WHERE name='${message.member.user.tag}'`, (error, result, field) => {
@@ -267,46 +288,60 @@ client.on('message', message => {
     }
   }
 
-  /* Kick (Permissions Only) */
+  /* $kick [user] -> (Permissions Only) */
   if(command == "kick") {
-    let member = message.mentions.members.first();
-    if(message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
-      member.kick().then((member) => {
-        message.channel.send(`:wave: Goodbye ${member.displayName}! :wave:`);
-      })
-    }
-  }
-
-  /* Ban (Permissions Only) */
-  if(command == "ban") {
-    let member = message.mentions.members.first();
-    if(message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
-      member.ban().then((member) => {
-        message.channel.send(`:wave: Goodbye ${member.displayName}! :wave:`);
-      })
-    }
-  }
-
-  /* Give Credits (Admin Only) */
-  if (command == "give") {
-    let userGettingCredits = message.mentions.members.first().user.tag;
-    let value = args[1];
-    console.log(userGettingCredits);
-    console.log(value);
-    if(message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
-      connection.query(`SELECT * FROM points WHERE name='${userGettingCredits}'`, (errors, result, field) => {
-        if (result.length > 0) {
-          let points = result[0].points; /* Current Points */
-          let newPoints = parseInt(points) + parseInt(value); /* New Points */
-          connection.query(`UPDATE points SET points="${newPoints}" WHERE name="${userGettingCredits}"`);
-          message.channel.send(`You have been given ${value} points, ${userGettingCredits}. Type $help for more info.`);
-        } else {
-          connection.query(`INSERT INTO points(name, points) VALUES('${userGettingCredits}', '${value}')`);
-          message.channel.send(`You have been given ${value} points, ${userGettingCredits}. Type $help for more info.`);
-        }
-      })
+    if(message.mentions.members.first()) {
+      let member = message.mentions.members.first();
+      if(message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
+        member.kick().then((member) => {
+          message.channel.send(`:wave: Goodbye ${member.displayName}! :wave:`);
+        })
+      }
     } else {
-      message.channel.send("You don't have permission to use this command!");
+      message.channel.send(`Enter a username`);
+    }
+  }
+
+  /* $ban [user] -> (Permissions Only) */
+  if(command == "ban") {
+    if(message.mentions.members.first()) {
+      let member = message.mentions.members.first();
+      if(message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
+        member.ban().then((member) => {
+          message.channel.send(`:wave: Goodbye ${member.displayName}! :wave:`);
+        })
+      }
+    } else {
+      message.channel.send(`Enter a username`);
+    }
+  }
+
+  /* $give [username] [amount] -> (Admin Only) */
+  if (command == "give") {
+    if(!message.mentions.members.first()) {
+      message.channel.send(`You didn't declare a name!`);
+    } else {
+      let userGettingCredits = message.mentions.members.first().user.tag;
+      let value = parseInt(args[1]);
+      if(!isNaN(value)) {
+        if(message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
+          connection.query(`SELECT * FROM points WHERE name='${userGettingCredits}'`, (errors, result, field) => {
+            if (result.length > 0) {
+              let points = result[0].points; /* Current Points */
+              let newPoints = parseInt(points) + parseInt(value); /* New Points */
+              connection.query(`UPDATE points SET points="${newPoints}" WHERE name="${userGettingCredits}"`);
+              message.channel.send(`You have been given ${value} points, ${userGettingCredits}. Type $help for more info.`);
+            } else {
+              connection.query(`INSERT INTO points(name, points) VALUES('${userGettingCredits}', '${value}')`);
+              message.channel.send(`You have been given ${value} points, ${userGettingCredits}. Type $help for more info.`);
+            }
+          })
+        } else {
+          message.channel.send("You don't have permission to use this command!");
+        }
+      } else {
+        message.channel.send("Enter a number!");
+      }
     }
   }
 
@@ -316,7 +351,6 @@ client.on('message', message => {
     for(let i = 0; i < args.length; i++) {
       word += `${args[i]} `;
     }
-    console.log(word);
     let url = `http://api.urbandictionary.com/v0/define?term=${word}`;
     axios.get(url).then((response) => {
       let definition = response.data.list[0].definition;
@@ -325,13 +359,29 @@ client.on('message', message => {
   }
 
   /* $weather [zipcode] -> Local weather by zipcode */
-  if(command == "zipcode") {
-    let zipcode = args[0];
-    let url = `api.openweathermap.org/data/2.5/weather?zip=${zipcode},us&APPID=${weatherAPI}`;
-    axios.get(url).then((response) => {
-      console.log(response);
-    })
+  if(command == "weather") {
+    let city = args[0];
+    //built-in function
+    console.log ( isNaN(city) );
+    if(isNaN(city)) {
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${weatherAPI}`).then((response) => {
+        console.log(response.data.weather[0]);
+      })
+    } else {
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${city},us&APPID=${weatherAPI}`).then((response) => {
+        console.log(response.data.weather[0]);
+      })
+    }
   }
+
+  // /* $weather [city] -> Local weather by zipcode */
+  // if(command == "weather") {
+  //   let zipcode = args[0];
+  //   axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${zipcode},us&APPID=${weatherAPI}`).then((response) => {
+  //     console.log(response.data.wind);
+  //     // console.log(response.wind);
+  //   })
+  // }
 
   /* $vac [username] -> Steam Data */
   // if(command == "vac") {
