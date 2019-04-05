@@ -423,6 +423,60 @@ client.on('message', message => {
       message.channel.send("```" + `\n${username} Stats\n\nKills: ${kills}\nK/D: ${kda}\nWins: ${wins}\nGames Played: ${gamesplayed}` + "```");
     })
   }
+
+  if(command == "apex") {
+    let username = args[0];
+    let labelOne, labelTwo, labelThree, level, kills;
+    let url = `https://public-api.tracker.gg/apex/v1/standard/profile/5/${username}`
+
+    axios.get(url, {
+      headers: {
+        "TRN-Api-Key": "f0669a9f-e064-4957-8fe1-a2fec651c4cd"
+      }
+    }).then((response) => {
+      if (response.data.data.stats) {
+        console.log(response.data.data.stats.length);
+        if (response.data.data.stats.length >= 2 && response.data.data.stats.length < 4) {
+          // console.log("ln439 " + response.data.data.stats[0].metadata.key);
+          if (response.data.data.stats[0].metadata.key === "Level") {
+             level = response.data.data.stats[0].value;
+          }
+
+          if (response.data.data.stats[1].metadata.key === "Kills") {
+            labelThree = "Kills";
+            kills = response.data.data.stats[1].value;
+          } else if (response.data.data.stats[1].metadata.key === "SeasonWins") {
+            labelThree = "Season Wins";
+            kills = response.data.data.stats[1].value;
+          }
+          // console.log(response.data.data.stats);
+          
+          message.channel.send("```" + `\n${username} Stats\n\nLevel: ${level}\n${labelThree}: ${kills}` + "```");
+        } else {
+          let level = response.data.data.stats[0].value;
+          let kills = response.data.data.stats[1].value;
+          let kda = response.data.data.stats[2].value;
+          let gamesplayed = response.data.data.stats[3].value;
+
+          if (response.data.data.stats[2].metadata.key === 'KillsPerMatch') {
+            labelOne = "Kills Per Match";
+          } else if (response.data.data.stats[2].metadata.key === 'Damage') {
+            labelOne = "Total Damage";
+          }
+
+          if (response.data.data.stats[3].metadata.key === 'MatchesPlayed') {
+            labelTwo = "Matches Played";
+          } else if (response.data.data.stats[3].metadata.key === 'SeasonKills') {
+            labelTwo = "Season Kills";
+          }
+
+          message.channel.send("```" + `\n${username} Stats\n\nLevel: ${level}\nKills: ${kills}\n${labelOne}: ${kda}\n${labelTwo}: ${gamesplayed}` + "```");
+        }
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 })
 
 /* User joins channel */
@@ -452,4 +506,4 @@ client.on('guildMemberRemove', member => {
   channel.send(`Goodbye, ${member.user.tag}. Come again soon!`);
 });
 
-client.login(token);
+client.login(process.env.secret);
